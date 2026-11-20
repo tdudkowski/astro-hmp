@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.10",
+    "@astrojs/mdx": "^8.1.6",
+    "@astrojs/prism": "^4.1.2",
+    "@astrojs/sitemap": "^3.7.6",
+    "astro": "^7.4.13",
+    "web-vitals": "^4.2.4"
+  },
+  "devDependencies": {
+    "@hbsnow/rehype-sectionize": "^1.0.7"
+  }
+}

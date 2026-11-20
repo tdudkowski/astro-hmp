@@ -1,0 +1,28 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+type Props = {
+  post: CollectionEntry<'maria_langner'>
+};
+
+export async function getStaticPaths() {
+  const entries = await getCollection('maria_langner');
+  
+  // const dayOfTheMonth = new Date().toISOString().slice(8,10);
+  // let todaysMax = Number(dayOfTheMonth) + 36;  
+  // const filteredChapters = entries.filter((a) => a.id <= todaysMax)
+ 
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { post: entry },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+export const prerender = true;
+---
+
+<Content post={post} />

@@ -1,0 +1,8 @@
+---
+import { getCollection } from 'astro:content';
+const allPostsBlog = await getCollection('blog');
+---
+
+<ul class="blogpostslist">
+    {allPostsBlog.map((post) => <li class={post.data.subsection}><a href={`/blog/${post.id}`}>{post.data.title}</a></li>)}
+</ul>

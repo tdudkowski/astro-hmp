@@ -1,0 +1,69 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import ButtonToggleLD from '../components/ButtonToggleLD.astro';
+import PrevNext from '../components/LangnerPrevNext.astro'
+import '../styles/langner.css'
+const { frontmatter } = Astro.props;
+const ogimage = '/fbimages/langner-header1.jpg'
+const numberForComponent = Number(Astro.url.href.slice(36).replace(/\D/g, ''));
+let chapterTitle;
+(() => { {
+  if (frontmatter && frontmatter.description) {
+    return chapterTitle=` rozdział ${numberForComponent}: ${frontmatter.title}`;
+  } else if (frontmatter && frontmatter.title) {
+    return chapterTitle=` - ${frontmatter.title}`;
+  } else {
+    return chapterTitle='';
+  }
+}})()
+const pageTitle = `Maria Langner "Ostatni bastion"${chapterTitle}`
+const description = frontmatter && frontmatter.description ? frontmatter.description : "Wspomnienia z więzienia Gestapo we Wrocławiu - 1945";
+---
+<BaseLayout img={ogimage} title={pageTitle} description={description}>
+    <header>
+        <nav><a href="/">Strona główna dygresje.info</a></nav>
+        <ButtonToggleLD />
+        <h1><a href="/maria-langner">Maria Langner <span>"Ostatni bastion"</span></a></h1></header>
+    <main>
+        <aside>
+            <h3>Impressum</h3>
+            <p class="impressum">Wspomnienia politycznej więźniarki wrocławskiego Gestapo z czasu bitwy o Wrocław.<br />
+                Wydane w NRD w 1948. W Polsce w 1951.<br /><br />
+                Książka jest dodatkiem do bloga wojennego<br />
+                <a href="/festung-breslau">Festung&nbsp;Breslau&nbsp;1945 täglich</a>
+                </p>
+
+            <h3>Menu</h3>
+          <nav>
+            <ul>
+                <li><a href="/maria-langner">Maria Langner "Ostatni bastion"</a></li>
+                <li><a href="/maria-langner/maria-langner">Maria Lagner</a> o autorce</li>
+                <li><a href="/maria-langner/ostatni-bastion">Ostatni bastion</a> o książce</li>
+                <li><a href="/maria-langner/ss-sd-gestapo">SS, RSHA, SD, Gestapo</a> wyjaśnienie</li>
+                <li><a href="/maria-langner/wroclawskie-gestapo">Wrocławskie Gestapo</a></li>
+            </ul>
+            </nav>
+
+            <h3>Odnośniki</h3>
+            <nav>
+<ul>
+    <li>wikipedia <a href="https://de.wikipedia.org/wiki/Maria_Langner">Maria Langner</a></li>
+    <li>Deutsche Biographie <a href="https://www.deutsche-biographie.de/gnd106277901.html#ndbcontent">Langner, Maria, geborene Pollitzer</a></li>
+    <li>books.google <a href="https://books.google.pl/books/about/Die_letzte_Bastion.html?id=J8RdAAAAIAAJ&redir_esc=y">Die letzte Bastion</a></li>
+    <li><a href="https://placgrunwaldzki.com/dzialania/archiwum-sasiedzkie/felietony/czas-bez-dzwonow-spacerem-przez-kaiserstrasse/">Piotr Lis "Czas bez dzwonów. Spacerem przez Kaiserstrasse"</a></li>
+</ul>
+</nav>
+        </aside>
+        <article>
+            {frontmatter && frontmatter.title ? <h2>{frontmatter.title}</h2>: null}
+        <slot />
+           {frontmatter && frontmatter.description ?  <PrevNext number={numberForComponent} /> : null}
+        </article>
+    </main>
+    <footer>
+
+        <p><a href="/maria-langner">Maria Langner "Ostatni bastion"</a></p>
+        <p><a href="/">dygresje.info</a> | <a href="/festung-breslau">Festung Breslau 1945 täglich</a></p>
+        
+    </footer>
+</BaseLayout>

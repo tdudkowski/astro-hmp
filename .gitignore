@@ -1,0 +1,12 @@
+.astro
+.idea
+dist
+archiv
+node_modules
+log.md
+log2.md
+
+# other
+.cache
+.DS_Store
+*.log
